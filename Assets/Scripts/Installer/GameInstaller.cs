@@ -1,3 +1,4 @@
+using Assets.Scripts.Utils;
 using UnityEngine;
 using Zenject;
 
@@ -7,16 +8,18 @@ namespace Assets.Scripts
     {
         public override void InstallBindings()
         {
+            Container.BindInterfacesAndSelfTo<MovementLogic>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CirclesController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<SquaresController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CountdownTimer>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerDataManager>().AsSingle().NonLazy();
+
             Container.Bind<EngineManager>()
                 .To<EngineManager>()
                 .FromNewComponentOnNewGameObject()
                 .WithGameObjectName("TimeManager")
                 .AsSingle()
                 .NonLazy();
-
-            Container.Bind<PlayerDataManager>().AsSingle().NonLazy();
-            Container.Bind<SquaresController>().AsSingle().NonLazy();
-            Container.Bind<CirclesController>().AsSingle().NonLazy();
         }
     }
 }

@@ -5,26 +5,22 @@ using Zenject;
 
 namespace Assets.Scripts
 {
-    public class PlayerDataManager : IDisposable
+    public class PlayerDataManager : IDisposable, IInitializable
     {
-        [Inject] private EngineManager _engineManager;
         [Inject] private Settings _settings;
         public ReactiveProperty<float> TotalDistance = new ReactiveProperty<float>();
         public ReactiveProperty<int> Score = new ReactiveProperty<int>();
-        private CompositeDisposable _disposable = new CompositeDisposable();
         private PlayerData playerData;
 
-        [Inject]
-        private void Setup()
+        public void Initialize()
         {
             playerData = SaveManager.GetSavedData();
             TotalDistance.Value = playerData.totalDistance;
             Score.Value = playerData.totalScore;
             Score.Subscribe(_ => playerData.totalScore = _);
             TotalDistance.Subscribe(_ => playerData.totalDistance = _);
-            _engineManager.OnApplicationQuitCommand.Subscribe(_ => SaveManager.Save(playerData)).AddTo(_disposable);
         }
-
+       
         public void IncreaseDistance(float deltaDistance)
         {
             TotalDistance.Value += deltaDistance;
@@ -37,9 +33,11 @@ namespace Assets.Scripts
 
         public void Dispose()
         {
+            SaveManager.Save(playerData);
             TotalDistance?.Dispose();
             Score?.Dispose();
-            _disposable?.Dispose();
         }
+
+       
     }
 }

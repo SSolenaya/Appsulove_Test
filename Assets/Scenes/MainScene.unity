@@ -235,25 +235,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneContext
       objectReference: {fileID: 0}
-    - target: {fileID: 5063926177039816011, guid: caa24c38990c3184c869f557466703d4, type: 3}
-      propertyPath: _scriptableObjectInstallers.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5063926177039816012, guid: caa24c38990c3184c869f557466703d4, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5063926177039816012, guid: caa24c38990c3184c869f557466703d4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1407.6914
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5063926177039816012, guid: caa24c38990c3184c869f557466703d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 257.1009
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5063926177039816012, guid: caa24c38990c3184c869f557466703d4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.783785
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5063926177039816012, guid: caa24c38990c3184c869f557466703d4, type: 3}
       propertyPath: m_LocalRotation.w

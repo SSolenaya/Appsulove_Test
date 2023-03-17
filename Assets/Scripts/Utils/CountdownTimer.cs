@@ -1,7 +1,9 @@
 using System;
+using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Utils {
-    public class CountdownTimer
+    public class CountdownTimer: ITickable
     {
         private bool _isCountingAllowed;
         private float _countdownTime;
@@ -28,11 +30,11 @@ namespace Assets.Scripts.Utils {
             _timerAct += act;
         }
 
-        public void Countdown(float deltaTime)
+        public void Countdown()
         {
             if (_isCountingAllowed)
             {
-                _countdownTime -= deltaTime;
+                _countdownTime -= Time.deltaTime;
                 if (_countdownTime <= 0)
                 {
                     _countdownTime = 0;
@@ -42,6 +44,11 @@ namespace Assets.Scripts.Utils {
 
                 _timerAct?.Invoke(_countdownTime);
             }
+        }
+
+        public void Tick()
+        {
+            Countdown();
         }
     }
 }

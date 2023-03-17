@@ -9,27 +9,26 @@ using Zenject;
 
 namespace Assets.Scripts
 {
-    public class SquaresController : IDisposable
+    public class SquaresController : IInitializable, IDisposable
     {
         [Inject] private Factory _factory;
         [Inject] private Field _field;
-        [Inject] private EngineManager _engineManager;
         [Inject] private MainCanvas _mainCanvas;
         [Inject] private Settings _settings;
         [Inject] private PlayerDataManager _playerDataManager;
         [Inject] private CirclesController _circlesController;
+        [Inject] private CountdownTimer _createSquareTimer;
         [SerializeField] private SquareEntity _squareEntityPrefab;
         private List<SquareEntity> listSquareEntity = new List<SquareEntity>();
-        private CountdownTimer createSquareTimer = new CountdownTimer();
         private CompositeDisposable _disposable = new CompositeDisposable();
 
-        [Inject]
-        public void Setup()
+
+        public void Initialize()
         {
             CreateOnStart();
             CreateSquareTimer();
-            _engineManager.OnUpdateCommand.Subscribe(createSquareTimer.Countdown).AddTo(_disposable);
         }
+        
 
         private void CreateOnStart()
         {
@@ -49,7 +48,7 @@ namespace Assets.Scripts
 
         private void CreateSquareTimer()
         {
-            createSquareTimer.Setup(_settings.timeBeforeNewSquare, () => {
+            _createSquareTimer.Setup(_settings.timeBeforeNewSquare, () => {
                 CreateSquares(1);
                 CreateSquareTimer();
             });
@@ -87,5 +86,7 @@ namespace Assets.Scripts
         {
             _disposable.Clear();
         }
+
+        
     }
 }

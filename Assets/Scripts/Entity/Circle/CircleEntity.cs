@@ -5,16 +5,17 @@ namespace Assets.Scripts
 {
     public class CircleEntity
     {
+        private MovementLogic _movementLogic;
         private EntityView _circleView;
         private CircleBody _circleBody;
         private EntityHolder _entityHolder;
-        private MovementLogic _movementLogic;
         private EntityClickable _entityClickable;
         private CircleBehaviour _circleBehaviour;
+        
 
         public CircleEntity(Factory factory, 
-            MainCanvas mainCanvas, 
-            EngineManager engineManager, 
+            MainCanvas mainCanvas,  
+            EngineManager engineManager,
             IReturnClickPosition returnClickPosition, 
             IReturnDragPosition returnDragPosition, 
             PlayerDataManager playerDataManager, 
